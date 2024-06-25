@@ -1,0 +1,25 @@
+{
+  "name": "track",
+  "version": "1.0.0",
+  "description": "Todo list",
+  "main": "todo.js",
+  "scripts": {
+    "test": "node js/todo.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ryushe/todo.git"
+  },
+  "keywords": [
+    "todo",
+    "work",
+    "assistant",
+    "workflow"
+  ],
+  "author": "Ryushe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ryushe/todo/issues"
+  },
+  "homepage": "https://github.com/Ryushe/todo#readme"
+}
