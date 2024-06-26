@@ -7,3 +7,6 @@ todo:
 - react 
 - add/remove
 - draggable (resource)[https://www.youtube.com/watch?v=wv7pvH1O5Ho]
+
+
+with this I'm refactoring -> node env (index.js)

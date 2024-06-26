@@ -1,5 +1,5 @@
 const express = require('express');
-const messages = require('./messages');
+const messages = require('./js/messages');
 const bodyParser = require('body-parser');
 
 const app = express();

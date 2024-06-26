@@ -1,3 +1,30 @@
+// add button hehe
+const addButton = document.querySelector('.add_button');
+const popupContainer = document.querySelector('.popup-container');
+const submitBtn = document.querySelector('.submit-btn');
+const closeBtn = document.querySelector('.close-btn');
+
+addButton.onclick = ()=> {
+    popupContainer.classList.add('active');
+};
+closeBtn.onclick = ()=> {
+    popupContainer.classList.remove('active');
+};
+submitBtn.onclick = ()=> {
+    popupContainer.classList.remove('active');
+};
+
+// esc to close input popup
+document.addEventListener('keydown', function(event) { 
+  if (event.key === 'Escape' && popupContainer.classList.contains('active')) { 
+    popupContainer.classList.remove('active'); 
+  }
+});
+
+// export function updateJson(data){
+
+// }
+
 // things I do per day:
 
 // 1 medium post, blog read, etc
@@ -21,13 +48,9 @@
 // - can have move to bottom once completed
 // - multiple lists (hehe)
 
+// const test = require('./getListData');
 var currentList = "TodoList";
 var listJsonData;
- 
-var bounty = false;
-if (bounty) {
-    
-}
 
 function createCheckboxList(listId, items) {
     const list = document.getElementById(listId);
@@ -99,17 +122,6 @@ function handleLists(listCategories, categoryData){
 
     } 
 }
-
-// Function to get checked items (can be called on a button click or other event)
-const getCheckedItems = () => {
-    const checkedItems = [];
-    const checkboxes = document.querySelectorAll("input[type='checkbox']:checked");
-    for (const checkbox of checkboxes) {
-        checkedItems.push(checkbox.value);
-    }
-    console.log("Checked items:", checkedItems);
-    // You can further process the checkedItems here (e.g., store in local storage)
-};
 
 // clear button == clear boxes
 const uncheckAllButton = document.querySelector('.clear'); 
