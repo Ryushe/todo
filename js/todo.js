@@ -20,13 +20,16 @@
 // - can have ex: todo have button beside it upon hover to add to it
 // - can have move to bottom once completed
 // - multiple lists (hehe)
+const handlePopup = require('./add')
 
-// const test = require('./getListData');
+handlePopup();
+
 var currentList = "TodoList";
 var listJsonData;
 
  
 var bounty = false;
+ 
 if (bounty) {
     
 }
@@ -121,3 +124,4 @@ uncheckAllButton.addEventListener("click", ()=>{
       checkbox.checked = false;
     }
   });
+

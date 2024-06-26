@@ -1,30 +1,35 @@
+(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 // add button hehe
+
 const addButton = document.querySelector('.add_button');
 const popupContainer = document.querySelector('.popup-container');
 const submitBtn = document.querySelector('.submit-btn');
 const closeBtn = document.querySelector('.close-btn');
 
-addButton.onclick = ()=> {
-    popupContainer.classList.add('active');
-};
-closeBtn.onclick = ()=> {
-    popupContainer.classList.remove('active');
-};
-submitBtn.onclick = ()=> {
-    popupContainer.classList.remove('active');
-};
-
-// esc to close input popup
-document.addEventListener('keydown', function(event) { 
-  if (event.key === 'Escape' && popupContainer.classList.contains('active')) { 
-    popupContainer.classList.remove('active'); 
+function handlePopup(){
+  addButton.onclick = ()=> {
+      popupContainer.classList.add('active');
   }
-});
+  closeBtn.onclick = ()=> {
+      popupContainer.classList.remove('active');
+  }
+  submitBtn.onclick = ()=> {
+      popupContainer.classList.remove('active');
+  }
 
+  // esc to close input popup
+  document.addEventListener('keydown', function(event) { 
+    if (event.key === 'Escape' && popupContainer.classList.contains('active')) { 
+      popupContainer.classList.remove('active'); 
+    }
+});
+}
+module.exports = handlePopup;
 // export function updateJson(data){
 
 // }
 
+},{}],2:[function(require,module,exports){
 // things I do per day:
 
 // 1 medium post, blog read, etc
@@ -47,10 +52,19 @@ document.addEventListener('keydown', function(event) {
 // - can have ex: todo have button beside it upon hover to add to it
 // - can have move to bottom once completed
 // - multiple lists (hehe)
+const handlePopup = require('./add')
 
-// const test = require('./getListData');
+handlePopup();
+
 var currentList = "TodoList";
 var listJsonData;
+
+ 
+var bounty = false;
+ 
+if (bounty) {
+    
+}
 
 function createCheckboxList(listId, items) {
     const list = document.getElementById(listId);
@@ -123,6 +137,17 @@ function handleLists(listCategories, categoryData){
     } 
 }
 
+// Function to get checked items (can be called on a button click or other event)
+const getCheckedItems = () => {
+    const checkedItems = [];
+    const checkboxes = document.querySelectorAll("input[type='checkbox']:checked");
+    for (const checkbox of checkboxes) {
+        checkedItems.push(checkbox.value);
+    }
+    console.log("Checked items:", checkedItems);
+    // You can further process the checkedItems here (e.g., store in local storage)
+};
+
 // clear button == clear boxes
 const uncheckAllButton = document.querySelector('.clear'); 
 uncheckAllButton.addEventListener("click", ()=>{
@@ -131,3 +156,6 @@ uncheckAllButton.addEventListener("click", ()=>{
       checkbox.checked = false;
     }
   });
+
+
+},{"./add":1}]},{},[2]);

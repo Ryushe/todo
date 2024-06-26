@@ -1,5 +1,5 @@
 const express = require('express');
-const messages = require('./js/messages');
+const messages = require('./messages');
 const bodyParser = require('body-parser');
 
 const app = express();
@@ -21,3 +21,6 @@ app.use(bodyParser.urlencoded({ extended: false })); // parses incoming req bodi
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
+
+
+
