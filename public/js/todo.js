@@ -21,10 +21,6 @@
 // - can have move to bottom once completed
 // - multiple lists (hehe)
 
-
-
-
-
 var currentList = "TodoList";
 var listJsonData;
  
