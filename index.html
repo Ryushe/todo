@@ -4,10 +4,26 @@
     <meta name="viewport" 
           content="width=device-width, initial-scale=1.0">
     <title>Track</title>
-    <link rel="stylesheet" href="style.css"> </head>
+    <link rel="stylesheet" href="css/style.css"> </head>
 </head>
 
 <body>
+    <!-- ontop so it displays ontop -->
+    <a href="#" class="add_button">
+        <i class="label">+</i>
+      </a>
+    <div class="popup-container">
+        <div class="popup-box">
+            <h1>Enter Input:</h1>
+            <input type="text"></input>
+            <br>
+            <div class="popup-button">
+                <button class="submit-btn">Add</button>
+                <button class="close-btn">Exit</button>
+            </div>
+        </div>
+    </div>
+
     <h1>Did You Do Your Shit?</h1>
 
     <div class="main">You need to read one article:</div>
@@ -17,19 +33,10 @@
 
     <button class="clear">Clear</button>
 
-    <a href="#" class="add_button">
-        <i class="label">+</i>
-      </a>
-    <div class="popup-container">
-        <div class="popup-box">
-            <h1>Enter Input:</h1>
-            <br>
 
-        </div>
-    </div>
     
 
-    <script src="js/add.js"> </script>
+    <script type="module" src="js/add.js"> </script>
     <script src="js/todo.js"> </script>
 </body>
 </html>

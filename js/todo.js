@@ -6,14 +6,24 @@
 
 // to do: 
 // - add delete feature
-// - add to the list
+// - add to the list - current
 // - have categories displayed
 // - can create cats
+
+// - come back to promises / cache (can find in google ai chat)
+// - draggable list (find a way to make cats output too)
+    // also if cat has none dont display
+    // (https://www.youtube.com/watch?v=wv7pvH1O5Ho)
+
 
 // idea 
 // - can have ex: todo have button beside it upon hover to add to it
 // - can have move to bottom once completed
 // - multiple lists (hehe)
+
+
+
+
 
 var currentList = "TodoList";
 var listJsonData;

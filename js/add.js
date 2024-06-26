@@ -1,11 +1,26 @@
 // add button hehe
 const addButton = document.querySelector('.add_button');
-const closeModalButtons = document.querySelectorAll('[data-close-button]')
-const overlay = document.getElementById('overlay')
+const popupContainer = document.querySelector('.popup-container');
+const submitBtn = document.querySelector('.submit-btn');
+const closeBtn = document.querySelector('.close-btn');
 
-addButton.addEventListener('click', (event)=>{
-    event.preventDefault(); // Prevent default navigation
-    const modal = document.querySelector(button.dataset.modalTarget)
-    openModal(modal)
+addButton.onclick = ()=> {
+    popupContainer.classList.add('active');
+}
+closeBtn.onclick = ()=> {
+    popupContainer.classList.remove('active');
+}
+submitBtn.onclick = ()=> {
+    popupContainer.classList.remove('active');
+}
+
+// esc to close input popup
+document.addEventListener('keydown', function(event) { 
+  if (event.key === 'Escape' && popupContainer.classList.contains('active')) { 
+    popupContainer.classList.remove('active'); 
+  }
 });
 
+// export function updateJson(data){
+
+// }
