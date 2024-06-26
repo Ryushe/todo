@@ -2,9 +2,10 @@
   "name": "track",
   "version": "1.0.0",
   "description": "Todo list",
-  "main": "todo.js",
+  "main": "index.html",
   "scripts": {
-    "test": "node js/todo.js"
+    "test": "node server.mjs",
+    "run": "node public/server.mjs"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,11 @@
   "bugs": {
     "url": "https://github.com/Ryushe/todo/issues"
   },
-  "homepage": "https://github.com/Ryushe/todo#readme"
+  "homepage": "https://github.com/Ryushe/todo#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
 }
