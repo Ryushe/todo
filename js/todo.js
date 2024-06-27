@@ -20,19 +20,33 @@
 // - can have ex: todo have button beside it upon hover to add to it
 // - can have move to bottom once completed
 // - multiple lists (hehe)
-const handlePopup = require('./add')
+const handleAddPopup = require('./add')
+const fetchJsonData = require('./listJsonData')
 
-handlePopup();
+
 
 var currentList = "TodoList";
-var listJsonData;
-
- 
 var bounty = false;
+
  
 if (bounty) {
     
 }
+
+// add button popup
+handleAddPopup();
+
+(async () => {
+    try {
+        const { listCategories, categoryData } = await fetchJsonData(currentList);
+
+        if (listCategories != null && categoryData != null) {
+            handleLists(listCategories, categoryData);
+        }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  })();
 
 function createCheckboxList(listId, items) {
     const list = document.getElementById(listId);
@@ -58,36 +72,36 @@ function createCheckboxList(listId, items) {
     }
   }
 
-async function fetchJsonData() {
-    try {
-        const res = await fetch("/listData.json");
-        if (!res.ok) {
-            throw new Error(`HTTP error! Status: ${res.status}`);
-        }
-        return await res.json();
-    } catch (error) {
-        console.error("Unable to fetch data:", error);
-        return null; 
-    }
-  }
+// async function fetchJsonData() {
+//     try {
+//         const res = await fetch("/listData.json");
+//         if (!res.ok) {
+//             throw new Error(`HTTP error! Status: ${res.status}`);
+//         }
+//         return await res.json();
+//     } catch (error) {
+//         console.error("Unable to fetch data:", error);
+//         return null; 
+//     }
+//   }
   
-// gets data using fetchJsonData
-(async () => {
-    try {
-        listJsonData = await fetchJsonData();
+// // gets data using fetchJsonData
+// (async () => {
+//     try {
+//         listJsonData = await fetchJsonData();
 
-        // getting data dynamically
-        const listCategories = Object.keys(listJsonData[currentList]);
-        const categoryData = Object.values(listJsonData[currentList]);
-        handleLists(listCategories, categoryData);
-        sendOff(listJsonData);
+//         // getting data dynamically
+//         const listCategories = Object.keys(listJsonData[currentList]);
+//         const categoryData = Object.values(listJsonData[currentList]);
+//         handleLists(listCategories, categoryData);
+//         sendOff(listJsonData);
 
-                  console.log(listJsonData); 
-    } catch (error) {
-        console.error("Error fetching data:", error);
-    }
+//                   console.log(listJsonData); 
+//     } catch (error) {
+//         console.error("Error fetching data:", error);
+//     }
 
-})();
+// })();
 
 
 function sendOff(listJsonData){

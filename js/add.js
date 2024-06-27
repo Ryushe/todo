@@ -5,7 +5,7 @@ const popupContainer = document.querySelector('.popup-container');
 const submitBtn = document.querySelector('.submit-btn');
 const closeBtn = document.querySelector('.close-btn');
 
-function handlePopup(){
+function handleAddPopup(){
   addButton.onclick = ()=> {
       popupContainer.classList.add('active');
   }
@@ -23,7 +23,7 @@ function handlePopup(){
     }
 });
 }
-module.exports = handlePopup;
+module.exports = handleAddPopup;
 // export function updateJson(data){
 
 // }
