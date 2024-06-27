@@ -3,7 +3,7 @@ const messages = require('./messages');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 3000;
+const port = 8080;
 
 app.use(express.static('public'));
 app.get('/', (req, res) => {
@@ -21,3 +21,6 @@ app.use(bodyParser.urlencoded({ extended: false })); // parses incoming req bodi
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
+
+
+
