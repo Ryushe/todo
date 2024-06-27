@@ -30,84 +30,6 @@ module.exports = handleAddPopup;
 // }
 
 },{}],2:[function(require,module,exports){
-
- async function fetchJsonData(filename) {
-      try {
-        const response = await fetch('data', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ filename }) // Send filename in request body
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-    
-        const data = await response.json();
-
-        const listCategories = Object.keys(data);
-        const categoryData = Object.values(data);
-        return {listCategories, categoryData};
-
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    }
-
-
-module.exports = fetchJsonData;
-},{}],3:[function(require,module,exports){
-// things I do per day:
-
-// 1 medium post, blog read, etc
-// 15 min looking through twitter (finding tricks/payloads/etc)
-// if challenge - do challenge dont worry too much about below
-
-// to do: 
-// - add delete feature
-// - add to the list - current
-// - have categories displayed
-// - can create cats
-
-// - come back to promises / cache (can find in google ai chat)
-// - draggable list (find a way to make cats output too)
-    // also if cat has none dont display
-    // (https://www.youtube.com/watch?v=wv7pvH1O5Ho)
-
-
-// idea 
-// - can have ex: todo have button beside it upon hover to add to it
-// - can have move to bottom once completed
-// - multiple lists (hehe)
-const handleAddPopup = require('./add')
-const fetchJsonData = require('./listJsonData')
-
-
-
-var list = "TodoList";
-var bounty = false;
-
- 
-if (bounty) {
-    
-}
-
-// add button popup
-handleAddPopup();
-
-(async () => {
-    try {
-        const { listCategories, categoryData } = await fetchJsonData(list);
-
-        // if list and data exist go thru catagories and return the right one
-        if (listCategories != null && categoryData != null) {
-            handleLists(listCategories, categoryData);
-        }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  })();
-
 function createCheckboxList(listId, items) {
     const list = document.getElementById(listId);
     list.innerHTML = ""; // Clear previous content
@@ -155,6 +77,86 @@ const getCheckedItems = () => {
     // You can further process the checkedItems here (e.g., store in local storage)
 };
 
+
+module.exports = handleLists;
+},{}],3:[function(require,module,exports){
+
+ async function fetchJsonData(filename) {
+      try {
+        const response = await fetch('data', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ filename }) // Send filename in request body
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+    
+        const data = await response.json();
+
+        const listCategories = Object.keys(data);
+        const categoryData = Object.values(data);
+        return {listCategories, categoryData};
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+
+module.exports = fetchJsonData;
+},{}],4:[function(require,module,exports){
+// things I do per day:
+
+// 1 medium post, blog read, etc
+// 15 min looking through twitter (finding tricks/payloads/etc)
+// if challenge - do challenge dont worry too much about below
+
+// to do: 
+// - add delete feature
+// - add to the list - current
+// - have categories displayed
+// - can create cats
+
+// - come back to promises / cache (can find in google ai chat)
+// - draggable list (find a way to make cats output too)
+    // also if cat has none dont display
+    // (https://www.youtube.com/watch?v=wv7pvH1O5Ho)
+
+
+// idea 
+// - can have ex: todo have button beside it upon hover to add to it
+// - can have move to bottom once completed
+// - multiple lists (hehe)
+const handleAddPopup = require('./add')
+const fetchJsonData = require('./listJsonData')
+const handleLists = require('./listHandling')
+
+var list = "TodoList";
+var bounty = false;
+
+if (bounty) {
+    
+}
+
+// add button popup
+handleAddPopup();
+(async () => {
+    try {
+        const { listCategories, categoryData } = await fetchJsonData(list);
+
+        // if list and data exist go thru catagories and return the right one
+        if (listCategories != null && categoryData != null) {
+            handleLists(listCategories, categoryData);
+        }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  })();
+
+
+
 // clear button == clear boxes
 const uncheckAllButton = document.querySelector('.clear'); 
 uncheckAllButton.addEventListener("click", ()=>{
@@ -165,36 +167,4 @@ uncheckAllButton.addEventListener("click", ()=>{
   });
 
 
-// async function fetchJsonData() {
-//     try {
-//         const res = await fetch("/listData.json");
-//         if (!res.ok) {
-//             throw new Error(`HTTP error! Status: ${res.status}`);
-//         }
-//         return await res.json();
-//     } catch (error) {
-//         console.error("Unable to fetch data:", error);
-//         return null; 
-//     }
-//   }
-  
-// // gets data using fetchJsonData
-// (async () => {
-//     try {
-//         listJsonData = await fetchJsonData();
-
-//         // getting data dynamically
-//         const listCategories = Object.keys(listJsonData[currentList]);
-//         const categoryData = Object.values(listJsonData[currentList]);
-//         handleLists(listCategories, categoryData);
-//         sendOff(listJsonData);
-
-//                   console.log(listJsonData); 
-//     } catch (error) {
-//         console.error("Error fetching data:", error);
-//     }
-
-// })();
-
-
-},{"./add":1,"./listJsonData":2}]},{},[3]);
+},{"./add":1,"./listHandling":2,"./listJsonData":3}]},{},[4]);

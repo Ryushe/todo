@@ -22,20 +22,17 @@
 // - multiple lists (hehe)
 const handleAddPopup = require('./add')
 const fetchJsonData = require('./listJsonData')
-
-
+const handleLists = require('./listHandling')
 
 var list = "TodoList";
 var bounty = false;
 
- 
 if (bounty) {
     
 }
 
 // add button popup
 handleAddPopup();
-
 (async () => {
     try {
         const { listCategories, categoryData } = await fetchJsonData(list);
@@ -49,52 +46,7 @@ handleAddPopup();
     }
   })();
 
-function createCheckboxList(listId, items) {
-    const list = document.getElementById(listId);
-    list.innerHTML = ""; // Clear previous content
-  
-    for (const item of items) {
-        const listItem = document.createElement("li");
-        listItem.classList.add("hilight"); // hilights when hovered
 
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.id = item; // Set unique ID for each checkbox
-        checkbox.value = item; // Store item value in checkbox value
-    
-        const label = document.createElement("label");
-        label.textContent = item;
-        label.htmlFor = checkbox.id; 
-
-  
-        listItem.appendChild(checkbox);
-        listItem.appendChild(label);
-        list.appendChild(listItem);
-    }
-  }
-
-function handleLists(listCategories, categoryData){
-    if(listCategories) {
-        for(const listCat of listCategories) { // for cat in datalist
-            console.log(listCat);
-            console.log(categoryData[listCategories.indexOf(listCat)]);
-            specificData = categoryData[listCategories.indexOf(listCat)];
-            createCheckboxList(listCat, specificData);
-        }
-
-    } 
-}
-
-// Function to get checked items (can be called on a button click or other event)
-const getCheckedItems = () => {
-    const checkedItems = [];
-    const checkboxes = document.querySelectorAll("input[type='checkbox']:checked");
-    for (const checkbox of checkboxes) {
-        checkedItems.push(checkbox.value);
-    }
-    console.log("Checked items:", checkedItems);
-    // You can further process the checkedItems here (e.g., store in local storage)
-};
 
 // clear button == clear boxes
 const uncheckAllButton = document.querySelector('.clear'); 
@@ -104,36 +56,4 @@ uncheckAllButton.addEventListener("click", ()=>{
       checkbox.checked = false;
     }
   });
-
-
-// async function fetchJsonData() {
-//     try {
-//         const res = await fetch("/listData.json");
-//         if (!res.ok) {
-//             throw new Error(`HTTP error! Status: ${res.status}`);
-//         }
-//         return await res.json();
-//     } catch (error) {
-//         console.error("Unable to fetch data:", error);
-//         return null; 
-//     }
-//   }
-  
-// // gets data using fetchJsonData
-// (async () => {
-//     try {
-//         listJsonData = await fetchJsonData();
-
-//         // getting data dynamically
-//         const listCategories = Object.keys(listJsonData[currentList]);
-//         const categoryData = Object.values(listJsonData[currentList]);
-//         handleLists(listCategories, categoryData);
-//         sendOff(listJsonData);
-
-//                   console.log(listJsonData); 
-//     } catch (error) {
-//         console.error("Error fetching data:", error);
-//     }
-
-// })();
 
