@@ -1,5 +1,17 @@
-function createCheckboxList(listId, items) {
-    const list = document.getElementById(listId);
+function handleLists(listCategories, categoryData){
+    if(listCategories) {
+        for(const listCat of listCategories) { // for cat in datalist
+            console.log(listCat);
+            console.log(categoryData[listCategories.indexOf(listCat)]);
+            items = categoryData[listCategories.indexOf(listCat)];
+            createCheckboxList(listCat, items);
+        }
+
+    } 
+}
+
+function createCheckboxList(listCatagory, items) {
+    const list = document.getElementById(listCatagory);
     list.innerHTML = ""; // Clear previous content
   
     for (const item of items) {
@@ -22,17 +34,16 @@ function createCheckboxList(listId, items) {
     }
   }
 
-function handleLists(listCategories, categoryData){
-    if(listCategories) {
-        for(const listCat of listCategories) { // for cat in datalist
-            console.log(listCat);
-            console.log(categoryData[listCategories.indexOf(listCat)]);
-            specificData = categoryData[listCategories.indexOf(listCat)];
-            createCheckboxList(listCat, specificData);
-        }
 
-    } 
-}
+
+// clear button == clear boxes
+const uncheckAllButton = document.querySelector('.clear'); 
+uncheckAllButton.addEventListener("click", ()=>{
+    const checkboxes = document.querySelectorAll("input[type='checkbox']");
+    for (const checkbox of checkboxes) {
+      checkbox.checked = false;
+    }
+  });
 
 // Function to get checked items (can be called on a button click or other event)
 const getCheckedItems = () => {
@@ -45,6 +56,9 @@ const getCheckedItems = () => {
     // You can further process the checkedItems here (e.g., store in local storage)
 };
 
+
+// see what is different between top fn and this, making id listHandler create catagories and list items
+// https://www.dhiwise.com/post/step-by-step-tutorial-crafting-an-html-dynamic-list
 function createCategory(category) {
     const categoryElement = document.createElement('div');
     categoryElement.classList.add('category');

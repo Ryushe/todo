@@ -21,8 +21,8 @@
 // - can have move to bottom once completed
 // - multiple lists (hehe)
 const handleAddPopup = require('./add')
-const fetchJsonData = require('./listJsonData')
-const handleLists = require('./listHandling')
+const fetchJsonData = require('./dataHandler')
+const handleLists = require('./listHandler')
 
 var list = "TodoList";
 var bounty = false;
@@ -35,6 +35,7 @@ if (bounty) {
 handleAddPopup();
 (async () => {
     try {
+        // want to add cache, so if no cache we pull from json
         const { listCategories, categoryData } = await fetchJsonData(list);
 
         // if list and data exist go thru catagories and return the right one
@@ -48,12 +49,5 @@ handleAddPopup();
 
 
 
-// clear button == clear boxes
-const uncheckAllButton = document.querySelector('.clear'); 
-uncheckAllButton.addEventListener("click", ()=>{
-    const checkboxes = document.querySelectorAll("input[type='checkbox']");
-    for (const checkbox of checkboxes) {
-      checkbox.checked = false;
-    }
-  });
+
 
