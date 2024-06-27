@@ -1,19 +1,40 @@
-async function fetchJsonData(currentList) {
+async function fileExists(list) {
     try {
-        const res = await fetch("/listData.json");
-        if (!res.ok) {
-            throw new Error(`HTTP error! Status: ${res.status}`);
+        const response = await fetch(`notes/${list}.json`);
+        if (response.ok) {
+            return true;
+        } else {
+          console.log('Creating file since it does not exist', await response.text());
+            return false;
         }
-        listJsonData = await res.json();
+      } catch (error) {
+        console.error('Error checking file:', error);
+      }
+}
 
-        const listCategories = Object.keys(listJsonData[currentList]);
-        const categoryData = Object.values(listJsonData[currentList]);
 
-        return {listCategories, categoryData};
-    } catch (error) {
-        console.error("Unable to fetch data:", error);
-        return null; 
+async function fetchJsonData(list) {
+    // if file doesnt exist
+    if (await fileExists(list)) {
+        // going to have in other file
+        // createFile();
     }
+        try {
+            const res = await fetch(`notes/${list}.json`);
+            if (!res.ok) {
+                throw new Error(`HTTP error! Status: ${res.status}`);
+            }
+            listJsonData = await res.json();
+
+            const listCategories = Object.keys(listJsonData);
+            const categoryData = Object.values(listJsonData);
+
+            return {listCategories, categoryData};
+        } catch (error) {
+            console.error("Unable to fetch data:", error);
+            return null; 
+        }
+    
   }
 
 
