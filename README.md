@@ -13,4 +13,9 @@ with this I'm refactoring -> node env (index.js)
 
 
 commands:
-- `browserify js/todo.js -o public/bundle.js` 
+- `browserify public/js/todo.js -o public/bundle.js` 
+
+
+resources:
+- (popup)[https://www.youtube.com/watch?v=VO3HOri1TEw]
+- 

@@ -73,9 +73,6 @@ function createCheckboxList(listId, items) {
     }
   }
 
-function sendOff(listJsonData){
-}
-
 function handleLists(listCategories, categoryData){
     if(listCategories) {
         for(const listCat of listCategories) { // for cat in datalist
