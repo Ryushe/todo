@@ -37,4 +37,4 @@ function updateCacheData(){
 
 
 
-module.exports = fetchJsonData;
+export {fetchJsonData};
