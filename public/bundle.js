@@ -54,6 +54,20 @@ module.exports = handleAddPopup;
       }
     }
 
+function updateJsonData(){
+ // post to api that updates after cache has been updated
+}
+
+function fetchCacheData(){
+
+}
+
+function updateCacheData(){
+
+}
+
+
+
 
 module.exports = fetchJsonData;
 },{}],3:[function(require,module,exports){

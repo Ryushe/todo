@@ -1,10 +1,7 @@
 const express = require('express');
 const messages = require('./messages');
-const bodyParser = require('body-parser');
 const fs = require('fs').promises;
 const path = require('path'); 
-const appRoot = require('app-root-path');
-const notesPath = path.join(appRoot + '/notes');
 
 const app = express();
 const port = 8080;
@@ -31,7 +28,7 @@ app.post('/data', async (req, res) => {
       return res.status(400).send('Missing required field: filename');
     }
 
-    const filePath = `notes/${filename}.json`; // Construct full path
+    const filePath = path.join('notes', `${filename}.json`); // Construct full path
 
     const data = await readJsonData(filePath);
     if (!data) {

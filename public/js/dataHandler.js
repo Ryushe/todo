@@ -22,6 +22,18 @@
       }
     }
 
+function updateJsonData(){
+ // post to api that updates after cache has been updated
+}
+
+function fetchCacheData(){
+
+}
+
+function updateCacheData(){
+
+}
+
 
 
 
