@@ -1,9 +1,10 @@
 import { React } from "react";
 import "./App.css";
 import { AddButton, Popup } from "./components/AddButton";
+import DraggableList from "./components/DraggableList";
 // import CheckboxList from "./components/listHandler";
 // import MoveableList from "./components/listHandler";
-import { Test } from "./components/listHandler";
+// import { Test } from "./components/DraggableList";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
       {/* <CheckboxList /> */}
       {/* <MoveableList/> */}
       {/* <Test /> */}
+      <DraggableList />
       <AddButton /> {/* Render the AddButton component */}
       <Popup />     {/* Render the Popup component */}
     </div>
