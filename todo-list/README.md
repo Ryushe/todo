@@ -1,3 +1,3 @@
 commands:
-- node server/app.js
-- npm run proxy
+- npm start
+- node server/app.js --watch

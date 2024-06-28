@@ -1,0 +1,14 @@
+{
+    "list": [
+    {
+        "id": "",
+        "category" :"readablesList",
+        "items": ["Medium Post", "Blog Read"]
+    },
+    {
+        "id": "",
+        "category":"todos",
+        "items": ["Twitter 15 mins"]   
+    }
+    ]
+}

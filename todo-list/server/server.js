@@ -20,7 +20,23 @@ app.get('/about', (req, res) => {
 // CORS configuration (consider specific origins for security)
 // app.use(cors({ origin: 'http://localhost:3001' })); // Replace with allowed origin
 
-// get data from post request
+
+// reads note file
+async function getNote(filePath) {
+  try {
+    const data = await fs.readFile(filePath, 'utf8');
+    return JSON.parse(data);
+  } catch (error) {
+    if (error.code === 'ENOENT') { // Handle file not found
+      console.warn(`File not found: ${filePath}`);
+      return null; // Indicate missing file
+    } else {
+      throw error; // Re-throw other errors
+    }
+  }
+}
+
+// get data with post request
 app.post('/data', async (req, res) => {
   try {
     const { filename } = req.body; // Destructure data from request body
@@ -31,7 +47,8 @@ app.post('/data', async (req, res) => {
 
     const filePath = path.join('notes', `${filename}.json`); // Construct full path
 
-    const data = await readJsonData(filePath);
+
+    const data = await getNote(filePath);
     if (!data) {
       return res.status(404).send('Data file not found.');
     }
@@ -45,19 +62,6 @@ app.post('/data', async (req, res) => {
   }
 });
 
-async function readJsonData(filePath) {
-  try {
-    const data = await fs.readFile(filePath, 'utf8');
-    return JSON.parse(data);
-  } catch (error) {
-    if (error.code === 'ENOENT') { // Handle file not found
-      console.warn(`File not found: ${filePath}`);
-      return null; // Indicate missing file
-    } else {
-      throw error; // Re-throw other errors
-    }
-  }
-}
 
 app.use((req, res) => {
   res.status(404).send(messages.notFound);
