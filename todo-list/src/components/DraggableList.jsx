@@ -63,11 +63,6 @@
 
 // https://www.geeksforgeeks.org/drag-and-drop-sortable-list-using-reactjs/
 
-import React, { Component } from 'react'; 
-import { RiDragMove2Line } from 'react-icons/ri'; 
-
-import { fetchJsonData } from '../utils/dataHandler';
-import { AddButton } from './AddButton';
 
 //gets data -> console 
  
@@ -89,47 +84,48 @@ import { AddButton } from './AddButton';
 //     }
 //   })();
 
+import React, { Component } from 'react'; 
+import { RiDragMove2Line } from 'react-icons/ri'; 
+
+
+import { fetchJsonData } from '../utils/dataHandler';
+import { AddButton } from './AddButton';
+
 const data = await fetchJsonData("TodoList");
 
 class DraggableList extends Component{
   constructor(props) {
     super(props);
-    (async () => {
-      try {
-        this.setState({ ...data, draggingItem: null, newItemName: '', newItemImage: '' });
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        // Handle errors appropriately
-      }
-    })();
+    this.state = {
+      ...data,
+      draggingItem: null, 
+      newItemName: '', 
+      newItemImage: '', 
+    
+    };
+    console.log(this.state);
   }
   render(){
     return (
       <div className="sortable-list"> 
-        {this.state && this.state.items ? (
-          <>
+        <div className='new-item'>
+        </div>
 
-            <div className='new-item'>
-            </div>
-
-            {this.state.items.map((item, index) => ( 
-              <div 
-                key={item.id}
-              >
-                <div className="details"> 
-                  <img src={item.image} alt={item.name} /> 
-                  <span>{item.name}</span> 
-                </div> 
-                              
-                  {/* Use the React icon component */} 
-                  <RiDragMove2Line />  
-              </div> 
-              ))} 
-            </>
-        ) : (
-        <p>Loading...</p>
-        )}
+        {this.state.items.map((item, index) => ( 
+          <div 
+            key={item.id}
+          >
+            <div className="details"> 
+              <img src={item.image} alt={item.name} /> 
+              <span>{item.name}</span> 
+            </div> 
+                          
+              {/* Use the React icon component */} 
+              <RiDragMove2Line />  
+          </div> 
+          ))} 
       </div>
+
 
     );
   }
