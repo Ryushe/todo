@@ -45,7 +45,7 @@ app.post('/data', async (req, res) => {
       return res.status(400).send('Missing required field: filename');
     }
 
-    const filePath = path.join('notes', `${filename}.json`); // Construct full path
+    const filePath = path.join(__dirname, '..','notes', `${filename}.json`); // Construct full path
 
 
     const data = await getNote(filePath);

@@ -86,51 +86,31 @@
 
 import React, { Component } from 'react'; 
 import { RiDragMove2Line } from 'react-icons/ri'; 
+import { useEffect, useState } from "react";
 
-
-import { fetchJsonData } from '../utils/dataHandler';
+import { FetchJsonData } from '../utils/dataHandler';
 import { AddButton } from './AddButton';
 
-const data = await fetchJsonData("TodoList");
-
-class DraggableList extends Component{
-  constructor(props) {
-    super(props);
-    this.state = {
-      ...data,
-      draggingItem: null, 
-      newItemName: '', 
-      newItemImage: '', 
-    
-    };
-    console.log(this.state);
-  }
-  render(){
-    return (
-      <div className="sortable-list"> 
-        <div className='new-item'>
-        </div>
-
-        {this.state.items.map((item, index) => ( 
-          <div 
-            key={item.id}
-          >
-            <div className="details"> 
-              <img src={item.image} alt={item.name} /> 
-              <span>{item.name}</span> 
-            </div> 
-                          
-              {/* Use the React icon component */} 
-              <RiDragMove2Line />  
-          </div> 
-          ))} 
-      </div>
 
 
-    );
-  }
+// add moveable list NO CLASSES, find out why dont have list data in this file
+export default function FuckMe(){
+
+  const [listData, setListData] = useState([]);
+  const {data, isLoading, error} = FetchJsonData("TodoList");
+
+  useEffect(() => {
+    setListData(data)
+  }, [data, isLoading, error]);
+
+  console.log(isLoading)
+  if(!isLoading){
+  console.log(listData);
 }
+return (
+  <div>lol</div>
 
-export default DraggableList;
+)
 
+}
 
