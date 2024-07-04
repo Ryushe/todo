@@ -12,7 +12,7 @@ export function FetchJsonData (filename) {
 
  // update when filename is changed
   useEffect(() => {
-    fetchData().then(setData);
+    fetchData();
   }, [filename]);
 
   const fetchData = async () => {
@@ -25,11 +25,10 @@ export function FetchJsonData (filename) {
         });
 
         const data = await response.json();
-        return(data);
+        setData(data);
+        setIsLoading(false);
       } catch (error) {
         setError("Error in datahandler, fetch data");
-      } finally {
-        setIsLoading(false);
       }
   };
   return {data, isLoading, error}

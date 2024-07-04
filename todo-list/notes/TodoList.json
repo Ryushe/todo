@@ -1,5 +1,4 @@
-{
-    "list": [
+[
     {
         "id": "1",
         "category" :"readablesList",
@@ -10,5 +9,7 @@
         "category":"todos",
         "items": ["Twitter 15 mins"]   
     }
-    ]
-}
+]
+
+
+
