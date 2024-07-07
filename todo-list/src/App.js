@@ -1,20 +1,18 @@
 import { React } from "react";
 import "./App.css";
 import { AddButton, Popup } from "./components/AddButton";
-// import FuckMe from "./components/DraggableList";
-// import CheckboxList from "./components/listHandler";
-// import MoveableList from "./components/listHandler";
-import { DndContext, closestCorners } from "@dnd-kit/core";
+import { DndContext, KeyboardSensor, PointerSensor, TouchSensor, closestCorners, useSensor, useSensors} from "@dnd-kit/core";
 import { FetchJsonData } from "./utils/dataHandler";
 import { useState, useEffect } from "react";
 import { Column } from "./components/Column";
-import { arrayMove } from "@dnd-kit/sortable";
+import { SortableContext, arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 
 
 
 
 
 const App = () => {
+  // gets data using dataHandler.js
   const { data, isLoading, error } = FetchJsonData("TodoList");
   const [tasks, setTaskData] = useState([]); 
 
@@ -39,14 +37,27 @@ const App = () => {
       return arrayMove(tasks, originalPos, newPos)
 
     })
-  }
+  };
+
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    // useSensor(TouchSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
 
   return (
     <div className="app" >  
 
     <h1>Did You Do Your Shit?</h1>
 
-      <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
+      <DndContext 
+        sensors={sensors} 
+        onDragEnd={handleDragEnd} 
+        collisionDetection={closestCorners}>
+
         {tasks.length ? (
           <Column tasks={tasks}/>
         ) : (
