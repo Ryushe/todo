@@ -1,0 +1,18 @@
+[
+    {
+      "category": "readablesList",
+      "id": "task-1", 
+      "items": [
+        { "id": "1", "title": "Medium Post" },
+        { "id": "2", "title": "Blog Read" }
+      ]
+    },
+    {
+      "category": "todos",
+      "id": "task-2",
+      "items": [
+        { "id": "3", "title": "Twitter 15 mins" },
+        { "id": "4", "title": "Lolicon" }
+      ]
+    }
+]
