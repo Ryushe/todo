@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 // const categoryData = data[listCategories].map(item => item.items);
 
 export function FetchJsonData (filename) {
-  const[data, setData] = useState([]); //not sure if needed
+  const[jsonData, setData] = useState([]); //not sure if needed
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -31,7 +31,7 @@ export function FetchJsonData (filename) {
         setError("Error in datahandler, fetch data");
       }
   };
-  return {data, isLoading, error}
+  return {jsonData, isLoading, error}
 }
 
 

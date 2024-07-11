@@ -6,11 +6,12 @@ import { CSS } from "@dnd-kit/utilities";
 
 export const Task = ({id, title}) => {
     const {attributes, listeners, setNodeRef, transform, transition} = useSortable({id})
-    console.log(`id: ${id}\n title: ${title}`)
+    // console.log(`id: ${id}\n title: ${title}`)
 
     const style = {
         transition,
         transform: CSS.Transform.toString(transform),
+
     };
 
     return ( 
@@ -25,3 +26,5 @@ export const Task = ({id, title}) => {
         {title}</div>
     );
 };
+
+

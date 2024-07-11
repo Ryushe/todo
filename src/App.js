@@ -12,29 +12,27 @@ import { Collumn } from "./components/Collumn";
 
 const App = () => {
   // gets data using dataHandler.js
-  const { data, isLoading, error } = FetchJsonData("TodoList");
-  const [tasks, setTaskData] = useState([]); 
+  const { jsonData, isLoading, error } = FetchJsonData("TodoList");
+  const [data, setData] = useState([]); 
+  const[activeId, setActiveId] = useState();
 
-  console.log(data)
+  console.log(jsonData)
   useEffect(() => {
-    if (data) { // Update listData only when data is available
-      setTaskData(data);
+    if (jsonData) { // Update listData only when data is available
+      setData(jsonData);
     }
-  }, [data]);
+  }, [jsonData]);
 
-  const getTaskPos = id => tasks.findIndex(task => task.id === id)
+  const getTaskPos = id => data.items.findIndex(task => task.id === id)
 
   const handleDragEnd = event => {
     const {active, over} = event
-
     if(active.id === over.id) return;
 
-    setTaskData(tasks => {
+    setData(data => {
       const originalPos = getTaskPos(active.id);
       const newPos = getTaskPos(over.id);
-
-      return arrayMove(tasks, originalPos, newPos)
-
+      return arrayMove(data, originalPos, newPos)
     })
   };
 
@@ -49,15 +47,13 @@ const App = () => {
 
   return (
     <div className="app" >  
-
     <h1>Did You Do Your Shit?</h1>
-
       <DndContext 
         sensors={sensors} 
         onDragEnd={handleDragEnd} 
         collisionDetection={closestCorners}>
-        {tasks.length ? (
-          <Collumn tasks={tasks}/>
+        {data.length ? (
+          <Collumn data={data}/>
         ) : (
           <p>loading...</p>
         )
