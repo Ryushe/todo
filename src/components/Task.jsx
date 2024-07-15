@@ -25,7 +25,7 @@ export const Task = ({...props}) => {
 
 
     return ( 
-        <div className="navCardContent" ref={setNodeRef} style={dragStyle}>
+        <div className="task" ref={setNodeRef} style={dragStyle}>
         <span className="navInputIcon">
           {isSubMenu ? (
             <div

@@ -50,8 +50,6 @@ this is why it doesnt work (keep position)
   }
 ]
 
-
-
 [
   {
     "category": "readablesList",
@@ -84,7 +82,7 @@ key:
 
 no handlers yet in list.jsx
   also uncomment dragoverlay at end
-could rename <task/> -> because naming a little confusing 
+could rename <task/> -> ListItem, or something because naming a little confusing 
 
 todo:
   list.jsx:
