@@ -6,6 +6,7 @@ import { FetchJsonData } from "./utils/dataHandler";
 import { useState, useEffect } from "react";
 import { SortableContext, arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 import { Collumn } from "./components/Collumn";
+import { List } from "./components/List";
 
 
 
@@ -16,7 +17,6 @@ const App = () => {
   const [data, setData] = useState([]); 
   const[activeId, setActiveId] = useState();
 
-  console.log(jsonData)
   useEffect(() => {
     if (jsonData) { // Update listData only when data is available
       setData(jsonData);
@@ -48,7 +48,7 @@ const App = () => {
   return (
     <div className="app" >  
     <h1>Did You Do Your Shit?</h1>
-      <DndContext 
+      {/* <DndContext 
         sensors={sensors} 
         onDragEnd={handleDragEnd} 
         collisionDetection={closestCorners}>
@@ -58,7 +58,8 @@ const App = () => {
           <p>loading...</p>
         )
       }
-      </DndContext>
+      </DndContext> */}
+      <List/>
       <AddButton /> 
       <Popup />     {/* Render the Popup component */}
     </div>

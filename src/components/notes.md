@@ -49,4 +49,47 @@ this is why it doesnt work (keep position)
     ]
   }
 ]
+
+
+
+[
+  {
+    "category": "readablesList",
+    "id": "task-1", 
+    "items": [
+      { "id": "Item1", "title": "Medium Post" },
+      { "id": "Item2", "title": "Blog Read" }
+    ]
+  },
+  {
+    "category": "todos",
+    "id": "task-2",
+    "items": [
+      { "id": "Item3", "title": "Twitter 15 mins" },
+      { "id": "Item4", "title": "Lolicon" },
+      { "id": "Item5", "title": "Booze" }
+    ]
+  }
+]
 ```
+key:  
+  nav == category data(mine)
+    - nav is the first layer data
+  navitemscontainer == Category
+  navitemcard == task
+  type category == menu
+  type categoryitem == submenu
+  isCategoryItem == isSubMenu
+
+
+no handlers yet in list.jsx
+  also uncomment dragoverlay at end
+could rename <task/> -> because naming a little confusing 
+
+todo:
+  list.jsx:
+    - add dnd context fns
+    - create navitemcard
+  category.jsx:
+    - why is catedory of props undefined
+

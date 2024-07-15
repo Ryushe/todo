@@ -1,8 +1,8 @@
 function handleLists(listCategories, categoryData){
     if(listCategories) {
         for(const listCat of listCategories) { // for cat in datalist
-            console.log(listCat);
-            console.log(categoryData[listCategories.indexOf(listCat)]);
+            // console.log(listCat);
+            // console.log(categoryData[listCategories.indexOf(listCat)]);
             items = categoryData[listCategories.indexOf(listCat)];
             createCheckboxList(listCat, items);
         }

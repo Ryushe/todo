@@ -4,26 +4,47 @@ import "../css/Task.css"
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-export const Task = ({id, title}) => {
-    const {attributes, listeners, setNodeRef, transform, transition} = useSortable({id})
-    // console.log(`id: ${id}\n title: ${title}`)
+export const Task = ({...props}) => {
+    const { name, isSubMenu, item, id, listeners, attributes } = props;
 
-    const style = {
-        transition,
-        transform: CSS.Transform.toString(transform),
+    const {
+      attributes: subAttributes,
+      listeners: subListeners,
+      setNodeRef,
+      isDragging
+    } = useSortable({
+      id: id,
+      data: {
+        item,
+        name,
+        type: "submenu"
+      }
+    });
 
-    };
+    const dragStyle = { opacity: isDragging && isSubMenu ? "0.5" : 1 };
+
 
     return ( 
-    <div 
-        ref={setNodeRef} 
-        {...attributes} 
-        {...listeners} 
-        style={style}
-        className="task"
-    >
-        <input type="checkbox" className="checkbox"></input>
-        {title}</div>
+        <div className="navCardContent" ref={setNodeRef} style={dragStyle}>
+        <span className="navInputIcon">
+          {isSubMenu ? (
+            <div
+              className="subMenuIcon"
+              {...subListeners}
+              {...subAttributes}
+            >
+            </div>
+          ) : (
+            <div
+              className="mainMenuIcon"
+              {...listeners}
+              {...attributes}
+            >
+            </div>
+          )}
+        </span>
+        <p className="navMenuName">{name}</p>
+      </div>
     );
 };
 
