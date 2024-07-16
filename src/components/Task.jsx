@@ -27,7 +27,7 @@ export const Task = ({...props}) => {
     return ( 
         <div className="task" ref={setNodeRef} style={dragStyle}>
         <span className="navInputIcon">
-          {isSubMenu ? (
+          {isSubMenu ? ( // can change div to ex: DragDropIcon, for the icon beside moving item
             <div
               className="subMenuIcon"
               {...subListeners}

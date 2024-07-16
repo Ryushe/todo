@@ -19,7 +19,8 @@ export const List = () => {
   // gets data using dataHandler.js
   const { jsonData, isLoading, error } = FetchJsonData("TodoList");
   const [data, setData] = useState([]); 
-  const[activeId, setActiveId] = useState();
+  const[active, setActive] = useState();
+  const[nav, setNav] = useState(null);
 
   // console.log(jsonData)
   useEffect(() => {
@@ -27,6 +28,50 @@ export const List = () => {
       setData(jsonData);
     }
   }, [jsonData]);
+
+  function findContainer(id, type = "") {
+    let result = null;
+
+    if (id) {
+      if (id in data) {
+        return id;
+      }
+      if (type === "category") {
+        result = data.find((nav) => nav.id === id);
+      } else if (type === "item") {
+        result = data.find((nav) => {
+          if (nav.items && nav.items.length > 0) {
+            return nav.items.find((sub) => {
+              return sub.id === id;
+            });
+          }
+        return result;
+        })
+      }
+    }
+    return result;
+  }
+
+  function handleDragStart(event) {
+    setActive(event.active.id);
+    setNav(event.active.data.current);
+    console.log(`starting the movement of ${event.active.data.current}`)
+  }
+
+  function handleDragEnd(event) {
+    const {active, over} = event;
+    const {id} = active;
+    const activeType = active.data.current.type;
+    let overId = null;
+    let overType = null;
+    if (over) {
+      overId = over.id;
+      overType = over.data.current.type;
+    }
+
+    const activeContainer = findContainer(id, activeType)
+    
+  }
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -38,7 +83,7 @@ export const List = () => {
         <DndContext // make handle functions
         sensors={sensors}
         collisionDetection={closestCenter}
-        // onDragStart={handleDragStart}
+        onDragStart={handleDragStart}
         // onDragEnd={handleDragEnd}
         // onDragOver={handleDragOver}
       >

@@ -46,7 +46,7 @@ export const CategoryContainer = ({...props}) => {
     //list items styles
 
     const {isOver: subIsOver, setDraggableNodeRef: setSubDroppableNodeRef} = useSortable({
-      id: `Item${categoryId}`
+      id: `item${categoryId}`
     })
 
     const subDropStyle = {
@@ -78,7 +78,7 @@ export const CategoryContainer = ({...props}) => {
       </div>
       <div className={`navCardSubMenu ${!hasSubmenu && "increase"}`}>
         <SortableContext
-          id={`Item${categoryId}`}
+          id={`item${categoryId}`}
           items={list}
           strategy={verticalListSortingStrategy}
         >
