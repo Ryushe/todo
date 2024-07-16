@@ -82,7 +82,11 @@ key:
 
 no handlers yet in list.jsx
   also uncomment dragoverlay at end
-could rename <task/> -> ListItem, or something because naming a little confusing 
+
+
+issues:
+  could rename <task/> -> ListItem, or something because naming a little confusing 
+  issue with moving categories, if item moved to top item doesnt move
 
 todo:
   list.jsx:
@@ -90,4 +94,11 @@ todo:
     - create navitemcard
   category.jsx:
     - why is catedory of props undefined
+  task.jsx:
+    - fix placement of checkbox -> left
+    - make the box around the items draggable
 
+doing:
+  list.jsx:
+    - fixing moving subitems (issue with null items)
+    - dragover

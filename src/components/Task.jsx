@@ -11,17 +11,21 @@ export const Task = ({...props}) => {
       attributes: subAttributes,
       listeners: subListeners,
       setNodeRef,
+      transition,
+      transform,
       isDragging
     } = useSortable({
       id: id,
       data: {
         item,
         name,
-        type: "submenu"
+        type: "subMenu"
       }
     });
 
-    const dragStyle = { opacity: isDragging && isSubMenu ? "0.5" : 1 };
+    const dragStyle = { 
+      opacity: isDragging && isSubMenu ? "0.5" : 1,
+    };
 
 
     return ( 
@@ -33,6 +37,7 @@ export const Task = ({...props}) => {
               {...subListeners}
               {...subAttributes}
             >
+            {name}
             </div>
           ) : (
             <div
@@ -40,10 +45,11 @@ export const Task = ({...props}) => {
               {...listeners}
               {...attributes}
             >
+            {name}
             </div>
           )}
         </span>
-        <p className="navMenuName">{name}</p>
+        {isSubMenu ? <input type="checkbox" className="checkbox"></input>: null} {/* Can totally make this checkbox be on right */}
       </div>
     );
 };

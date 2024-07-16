@@ -53,7 +53,7 @@ export const CategoryContainer = ({...props}) => {
       height: "4px",
       backgroundColor: subIsOver ? "#a6b6cc" : "transparent",
       width: "180px",
-      margin: "8px 0px 8px 15px",
+      margin: "2px 0px 2px 15px",
       borderRadius: "8px",
     };
 
@@ -109,7 +109,7 @@ export const CategoryContainer = ({...props}) => {
           <span className="addSubMenuIcon">
             {/* <PlusIcon /> */}
           </span>
-          <p className="addSubMenuLabel">Add sub-menu</p>
+          <button className="addSubMenuLabel">Add sub-menu</button>
         </div>
       </div>
     </div>
