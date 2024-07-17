@@ -5,7 +5,6 @@ import { DndContext, KeyboardSensor, PointerSensor, TouchSensor, closestCorners,
 import { FetchJsonData } from "./utils/dataHandler";
 import { useState, useEffect } from "react";
 import { SortableContext, arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
-import { Collumn } from "./components/Collumn";
 import { List } from "./components/List";
 
 

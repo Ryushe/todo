@@ -10,7 +10,7 @@ import {
 } from "@dnd-kit/core";
 import {arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy} from "@dnd-kit/sortable";
 import { CategoryContainer } from "./Category";
-import {FetchJsonData, setJsonData} from "../utils/dataHandler";
+import {FetchJsonData, updateData} from "../utils/dataHandler";
 import { useState, useEffect } from "react";
 import { Task } from "./Task";
 import { insertAtIndex, removeAtIndex } from "../utils/indexHandler";
@@ -164,7 +164,7 @@ export const List = () => {
     setActive(null);
     setNav(null);
 
-    setJsonData(data, filename); // sets json data
+    updateData(data, filename); // sets json data
   }
 
 
@@ -230,7 +230,7 @@ export const List = () => {
     })
   );
     return (
-        <DndContext // make handle functions
+        <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
         onDragStart={handleDragStart}

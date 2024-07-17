@@ -84,19 +84,20 @@ doesnt update data into json, so data is not persistant
 
 issues:
   could rename <task/> -> ListItem, or something because naming a little confusing 
-  issue with moving categories, if item moved to top item doesnt move
+  issue with moving categories, item doesnt always move
+    - think I can look at the list ex where it checks if above / below and updates accord
+  
 
 todo:
   list.jsx:
-    - add dnd context fns
-    - create navitemcard
   category.jsx:
-    - why is catedory of props undefined
   task.jsx:
     - fix placement of checkbox -> left
     - make the box around the items draggable
+  server.js:
+    - getNote(if no note, create note)
 
 doing:
   list.jsx:
-    - fixing moving subitems (issue with null items)
     - dragover
+  

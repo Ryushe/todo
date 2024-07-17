@@ -38,20 +38,17 @@ export function FetchJsonData (filename) {
 }
 
 
-export function setJsonData(data, filename){
-  
-  (async () => {
+export async function updateData(data, filename){ // data fine here 
     try {
       const response = await fetch('/updateData', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ data, filename }),
       });
-
+    
     } catch (error) {
         console.log("Error sending json", error);
     }
-  })();
 }
 
 function fetchCacheData(){

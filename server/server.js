@@ -54,19 +54,25 @@ app.post('/data', async (req, res) => {
 
   } catch (error) {
     console.error('Error fetching data:', error);
-    res.status(500).send('Internal server error.');
+    res.status(500).send('Error with data file');
   }
 });
 
-app.post('/updateData', async (req, res) => { // figure out why data clears the data and not updates it 
+app.post('/updateData', async (req, res) => { // figure out why data clears the data and not updates it (can make async but didnt do shit)
   const { data, filename } = req.body;
   const filePath = path.join(__dirname, '..','notes', `${filename}.json`); // Construct full path
-  if (data) {
+  if (data.length != 0) {
     try {
-      await fs.writeFile(filePath, data);
-      return res.status(200).send('Json updated bby' + JSON.stringify(data));
+      await fs.writeFile(filePath, JSON.stringify(data, null, 4));
+      return res.status(200).send('Json updated bby' + data);
     } catch (error) {
-      return res.status(400).send('Error updating json');
+      if (error.code === 'ENOENT') {
+        return res.status(400).send('Error: File does not exist!');
+      } else if (error.code === 'EACCES') {
+        return res.status(403).send('Error: Permission denied!');
+      } else {
+        return res.status(500).send('Error updating JSON data!');
+      }
     }
   }
 })
