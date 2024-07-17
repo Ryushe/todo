@@ -80,9 +80,7 @@ key:
   isCategoryItem == isSubMenu
 
 
-no handlers yet in list.jsx
-  also uncomment dragoverlay at end
-
+doesnt update data into json, so data is not persistant
 
 issues:
   could rename <task/> -> ListItem, or something because naming a little confusing 

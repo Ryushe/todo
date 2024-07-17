@@ -135,8 +135,8 @@ export const List = () => {
         } else {
           console.log("different container move");
           let newItems;
-          const activeSubList = activeContainer.SubMenus;
-          const overSubList = overContainer.SubMenus;
+          const activeSubList = activeContainer.items;
+          const overSubList = overContainer.items;
           const activeContainerIndex = data.findIndex(
             (container) => container.id === activeContainer.id
           );
@@ -166,7 +166,6 @@ export const List = () => {
     
   }
 
-  // move onto movebetweencontainers assume above works
 
   const moveBetweenContainers = (
     dataItems,
@@ -186,15 +185,19 @@ export const List = () => {
         dataItems[activeContainerIndex]["items"],
         activeIndex
       ),
+    },
+      [overContainerIndex]: {
       ...overContainer,
       items: insertAtIndex(
         dataItems[overContainerIndex]["items"],
         overIndex,
         item.data.current.item
-      )
-    }
-   }
-  }
+      ),
+    },
+   };
+   return updatedList;
+  };
+   
 
   function handleDragOver(event) {
     const { active, over } = event;
