@@ -40,14 +40,10 @@ async function getNote(filePath) {
 app.post('/data', async (req, res) => {
   try {
     const { filename } = req.body; // Destructure data from request body
-
     if (!filename) {
       return res.status(400).send('Missing required field: filename');
     }
-
     const filePath = path.join(__dirname, '..','notes', `${filename}.json`); // Construct full path
-
-
     const data = await getNote(filePath);
     if (!data) {
       return res.status(404).send('Data file not found.');
@@ -61,6 +57,19 @@ app.post('/data', async (req, res) => {
     res.status(500).send('Internal server error.');
   }
 });
+
+app.post('/updateData', async (req, res) => { // figure out why data clears the data and not updates it 
+  const { data, filename } = req.body;
+  const filePath = path.join(__dirname, '..','notes', `${filename}.json`); // Construct full path
+  if (data) {
+    try {
+      await fs.writeFile(filePath, data);
+      return res.status(200).send('Json updated bby' + JSON.stringify(data));
+    } catch (error) {
+      return res.status(400).send('Error updating json');
+    }
+  }
+})
 
 
 app.use((req, res) => {

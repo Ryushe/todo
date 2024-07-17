@@ -18,7 +18,7 @@ export function FetchJsonData (filename) {
   const fetchData = async () => {
 
       try {
-        const response = await fetch('data', {
+        const response = await fetch('/data', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ filename }) // Send filename in request body
@@ -30,7 +30,6 @@ export function FetchJsonData (filename) {
           setIsLoading(false);
         } 
         
-        
       } catch (error) {
         setError("Error in datahandler, fetch data");
       }
@@ -39,8 +38,20 @@ export function FetchJsonData (filename) {
 }
 
 
-function updateJsonData(){
- // post to api that updates after cache has been updated
+export function setJsonData(data, filename){
+  
+  (async () => {
+    try {
+      const response = await fetch('/updateData', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ data, filename }),
+      });
+
+    } catch (error) {
+        console.log("Error sending json", error);
+    }
+  })();
 }
 
 function fetchCacheData(){

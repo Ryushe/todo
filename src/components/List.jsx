@@ -10,19 +10,20 @@ import {
 } from "@dnd-kit/core";
 import {arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy} from "@dnd-kit/sortable";
 import { CategoryContainer } from "./Category";
-import {FetchJsonData} from "../utils/dataHandler";
+import {FetchJsonData, setJsonData} from "../utils/dataHandler";
 import { useState, useEffect } from "react";
 import { Task } from "./Task";
 import { insertAtIndex, removeAtIndex } from "../utils/indexHandler";
 
 export const List = () => {
 
-
+  var filename = "ligma"
   // gets data using dataHandler.js
-  const { jsonData, isLoading, error } = FetchJsonData("TodoList");
+  const { jsonData, isLoading, error } = FetchJsonData(filename);
   const [data, setData] = useState([]); 
   const[active, setActive] = useState();
   const[nav, setNav] = useState(null);
+
 
   // console.log(jsonData)
   useEffect(() => {
@@ -73,7 +74,6 @@ export const List = () => {
 
     const activeContainer = findContainer(id, activeType);
     const overContainer = findContainer(overId, overType);
-    console.log("test "+ activeContainer.items.title);
 
     if (!activeContainer || !overContainer) {
       return;
@@ -163,7 +163,8 @@ export const List = () => {
     }
     setActive(null);
     setNav(null);
-    
+
+    setJsonData(data, filename); // sets json data
   }
 
 
