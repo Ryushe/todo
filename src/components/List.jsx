@@ -12,7 +12,7 @@ import {arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSor
 import { CategoryContainer } from "./Category";
 import {FetchJsonData, updateData} from "../utils/dataHandler";
 import { useState, useEffect } from "react";
-import { Task } from "./Task";
+import { ListItem } from "./ListItem"
 import { insertAtIndex, removeAtIndex } from "../utils/indexHandler";
 
 export var filename = "ligma"
@@ -246,15 +246,14 @@ export const List = () => {
             strategy={verticalListSortingStrategy}
           >
             { isLoading ? (<p></p>):
-            data.map((categoryData, index) => {
+            data.map((nav, index) => {
               return (
-                <div className="drop-container" key={categoryData.id}>
+                <div className="drop-container" key={nav.id}>
                   <CategoryContainer 
-                    category={categoryData.category}
-                    list={categoryData.items || []}
-                    categoryId={categoryData.id}
+                    item={nav}
+                    list={nav.items || []}
                     lastMenu={index === data.length - 1}
-                    hasSubmenu={categoryData.items && categoryData.items.length > 0}
+                    hasSubmenu={nav.items && nav.items.length > 0}
                     data={data}
                   />
                 </div>
@@ -265,7 +264,7 @@ export const List = () => {
         <DragOverlay> {/* when click and drag */}
           {active ? (
             <div className="navCard navCardDragging"> {/* make look better */}
-              <Task
+              <ListItem
                 name={nav.item.Name}
                 isSubMenu={nav.type === "subMenu" ? true : false}
               />

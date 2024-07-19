@@ -1,10 +1,10 @@
 import React from "react";
-import "../css/Task.css"
+import "../css/ListItem.css"
 
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-export const Task = ({...props}) => {
+export const ListItem = ({...props}) => {
     const { name, isSubMenu, item, id, listeners, attributes } = props;
 
     const {
@@ -29,7 +29,7 @@ export const Task = ({...props}) => {
 
 
     return ( 
-        <div className="task" ref={setNodeRef} style={dragStyle}>
+        <div className="listItem" ref={setNodeRef} style={dragStyle}>
         <span className="navInputIcon">
           {isSubMenu ? ( // can change div to ex: DragDropIcon, for the icon beside moving item
             <div

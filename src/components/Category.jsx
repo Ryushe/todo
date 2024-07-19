@@ -1,19 +1,17 @@
 import "../css/Column.css"
-import { Task } from "./Task"
+import { ListItem } from "./ListItem"
 import React from "react";
-import { useDroppable } from "@dnd-kit/core";
+import { useDraggable, useDroppable } from "@dnd-kit/core";
 import {
   useSortable,
   SortableContext,
   verticalListSortingStrategy
 } from "@dnd-kit/sortable";
-import { FetchJsonData } from "../utils/dataHandler";
-import { insertAtIndex } from "../utils/indexHandler";
 
 
 export const CategoryContainer = ({...props}) => {
   // console.log(`props = ${props.category}`);
-  const { category, lastMenu, hasSubmenu, list, categoryId, data} = props; 
+  const { item, lastMenu, hasSubmenu, list, data} = props; 
   // console.log(`category: ${category}`)
   // console.log(`id: ${categoryId}`)
 
@@ -22,10 +20,10 @@ export const CategoryContainer = ({...props}) => {
     listeners, 
     setNodeRef: setDraggableNodeRef, 
     isDragging,
-  } = useSortable({
-    id: categoryId,
+  } = useDraggable({
+    id: item.id,
     data: {
-      item: category,
+      item: item,
       lastMenu,
       hasSubmenu,
       type: "category"
@@ -33,10 +31,10 @@ export const CategoryContainer = ({...props}) => {
   })
 
   const {isOver, setNodeRef: setDroppableNodeRef } = useDroppable({
-    id: categoryId,
+    id: item.id,
     data: {
       type: "category",
-      item: category,
+      item: item,
     },
   })
 
@@ -48,7 +46,7 @@ export const CategoryContainer = ({...props}) => {
   //list items styles
 
   const {isOver: subIsOver, setDraggableNodeRef: setSubDroppableNodeRef} = useSortable({
-    id: `item${categoryId}`
+    id: `item${item.id}`
   })
 
   const subDropStyle = {
@@ -68,8 +66,8 @@ export const CategoryContainer = ({...props}) => {
     <div className="navCardMenu" ref={setDroppableNodeRef}>
       <div className="mainMenu">
         <div className="navCard" ref={setDraggableNodeRef}>
-          <Task
-            name={category}
+          <ListItem
+            name={item.category}
             listeners={listeners}
             attributes={attributes}
           />
@@ -81,7 +79,7 @@ export const CategoryContainer = ({...props}) => {
     </div>
     <div className={`navCardSubMenu ${!hasSubmenu && "increase"}`}>
       <SortableContext
-        id={`item${categoryId}`}
+        id={`item${item.id}`}
         items={list}
         strategy={verticalListSortingStrategy}
       >
@@ -95,7 +93,7 @@ export const CategoryContainer = ({...props}) => {
                 <div key={subMenu.id}>
                   <div style={subDropStyle}></div>
                   <div className="navSubMenuCard">
-                    <Task
+                    <ListItem
                       id={subMenu.id}
                       name={subMenu.title}
                       item={subMenu}
@@ -112,8 +110,9 @@ export const CategoryContainer = ({...props}) => {
   </div>
   );
 
-  function addItemButton(subMenuIndex){
-    if(subMenuIndex === list.length-1 || list.length === 0) {
+  function addItemButton(arg=""){
+
+    if(arg === list.length-1) {
       return (
         <div className="addSubMenu">
           <span className="addSubMenuIcon">
@@ -121,21 +120,32 @@ export const CategoryContainer = ({...props}) => {
           </span>
           <button 
             className="addItemButton"
-            onClick={() => addItem(subMenuIndex)}
+            onClick={() => addItem()} // replace the class name when clicked to show different box
             >
             Add Item
           </button>
         </div>
     )
   }
+    if(arg === "empty category") {
+      return (
+        <div className="addSubMenu">
+          <span className="addSubMenuIcon">
+            {/* <PlusIcon /> */}
+          </span>
+          <button 
+            className="addItemButton"
+            onClick={() => addItem()} // replace the class name when clicked to show different box
+            >
+            Add Item
+          </button>
+        </div>
+    )
+    }
 }
 
-  function addItem(listId) {
-    // const updatedList = {
-    //   ...data, 
-    //   items: insertAtIndex(
-    //     data[index]["items"]
-    //   )
-    // }    
+  function addItem(subMenuIndex) {
+    // console.log(categoryId)
+    // updatedData[categoryId]["items"].append()
   }
 }

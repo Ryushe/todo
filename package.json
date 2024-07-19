@@ -44,7 +44,8 @@
     ]
   },
   "devDependencies": {
-    "http-proxy-middleware": "^3.0.0"
+    "eslint": "^8.57.0",
+    "eslint-config-react-app": "^7.0.1"
   },
   "proxy": "http://localhost:4000"
 }
