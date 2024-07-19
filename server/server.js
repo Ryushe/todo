@@ -38,12 +38,13 @@ async function getNote(filePath) {
 
 // get data with post request
 app.post('/data', async (req, res) => {
+  const { filename } = req.body;
+  const filePath = path.join(__dirname, '..','notes', `${filename}.json`); // Construct full path
+
   try {
-    const { filename } = req.body; // Destructure data from request body
     if (!filename) {
       return res.status(400).send('Missing required field: filename');
     }
-    const filePath = path.join(__dirname, '..','notes', `${filename}.json`); // Construct full path
     const data = await getNote(filePath);
     if (!data) {
       return res.status(404).send('Data file not found.');
@@ -51,10 +52,15 @@ app.post('/data', async (req, res) => {
     else{
       res.json(data);
     }
-
   } catch (error) {
+    if (error.code === 'ENOENT') {
+      res.status(400).send('No File with that name, creating...');
+      fs.writeFile(filePath) // creates if no file
+    }
+    else{
     console.error('Error fetching data:', error);
     res.status(500).send('Error with data file');
+    }
   }
 });
 

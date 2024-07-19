@@ -83,12 +83,20 @@ key:
 doesnt update data into json, so data is not persistant
 
 issues:
-  could rename <task/> -> ListItem, or something because naming a little confusing 
-  issue with moving categories, item doesnt always move
+  - could rename <task/> -> ListItem, or something because naming a little confusing 
+  - need to add if task is over category it adds to it as well
+
+  - issue with moving categories, item doesnt always move
     - think I can look at the list ex where it checks if above / below and updates accord
-  
+    - SOLUTION: whin the top cat is over the bottom cat 
+
 
 todo:
+  general:
+    - make css area draggable on the obj 
+    - add to json {checked: true/false}
+    - now passing data to category container, could only pass the 
+
   list.jsx:
   category.jsx:
   task.jsx:
@@ -96,8 +104,7 @@ todo:
     - make the box around the items draggable
   server.js:
     - getNote(if no note, create note)
+    - make server display ex content if no content
 
 doing:
-  list.jsx:
-    - dragover
-  
+  addbutton -> list.jsx

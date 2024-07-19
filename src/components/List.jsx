@@ -15,9 +15,10 @@ import { useState, useEffect } from "react";
 import { Task } from "./Task";
 import { insertAtIndex, removeAtIndex } from "../utils/indexHandler";
 
+export var filename = "ligma"
+
 export const List = () => {
 
-  var filename = "ligma"
   // gets data using dataHandler.js
   const { jsonData, isLoading, error } = FetchJsonData(filename);
   const [data, setData] = useState([]); 
@@ -32,6 +33,8 @@ export const List = () => {
     }
   }, [jsonData]);
 
+
+  // dnd-kit specific functions
   function findContainer(id, type = "") {
     let result = null;
 
@@ -167,7 +170,6 @@ export const List = () => {
     updateData(data, filename); // sets json data
   }
 
-
   const moveBetweenContainers = (
     dataItems,
     activeContainer,
@@ -209,6 +211,7 @@ export const List = () => {
     if (over) {
       overId = over.id;
       overType = over.data.current.type;
+      console.log(over.id)
     }
     // Find the containers
     const activeContainer = findContainer(id, activeType);
@@ -252,6 +255,7 @@ export const List = () => {
                     categoryId={categoryData.id}
                     lastMenu={index === data.length - 1}
                     hasSubmenu={categoryData.items && categoryData.items.length > 0}
+                    data={data}
                   />
                 </div>
               )
